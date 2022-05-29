@@ -11,8 +11,8 @@
       <meetings-page :username="authenticatedUsername"></meetings-page>
     </div>
     <div v-else>
-      <button>Zaloguj się</button>
-      <button class="button-clear">Zarejestruj się</button>
+      <button @click="registering = false" :class = "!registering?'':'button-clear'">Zaloguj się</button>
+      <button @click="registering = true" :class = "registering?'':'button-clear'">Zarejestruj się</button>
       <login-form @login="login($event)"></login-form>
     </div>
   </div>
