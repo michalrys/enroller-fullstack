@@ -11,8 +11,8 @@
       <meetings-page :username="authenticatedUsername"></meetings-page>
     </div>
     <div v-else>
-      <button @click="registering = false" :class = "!registering?'':'button-clear'">Zaloguj się</button>
-      <button @click="registering = true" :class = "registering?'':'button-clear'">Zarejestruj się</button>
+      <button @click="registering = false" :class = "!registering?'':'button-clear'">Loguje się</button>
+      <button @click="registering = true" :class = "registering?'':'button-clear'">Rejestruje się</button>
         <login-form @login="login($event)" v-if="registering === false"></login-form>
         <login-form @login="register($event)" button-label="Zarejestruj się" v-else></login-form>
     </div>
@@ -36,12 +36,18 @@
             login(user) {
                 this.authenticatedUsername = user.login;
             },
-            register(user){
-
-            },
             logout() {
                 this.authenticatedUsername = '';
-            }
+            },
+          register(user) {
+            this.$http.post('participants', user)
+                .then(response => {
+                  // udało się
+                })
+                .catch(response => {
+                  // nie udało sie
+                });
+          }
         }
     };
 </script>
