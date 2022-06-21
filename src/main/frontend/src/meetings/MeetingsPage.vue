@@ -6,7 +6,7 @@
                Brak zaplanowanych spotkań.
            </span>
     <h3 v-else>
-      Zaplanowane zajęcia ({{ meetings.length }})
+      Wszystkie zaplanowane zajęcia ({{ meetings.length }})
     </h3>
 
     <meetings-list :meetings="meetings"
@@ -24,14 +24,37 @@
     export default {
         components: {NewMeetingForm, MeetingsList},
         props: ['username'],
+        mounted() {
+            // IS RUNNING ON START-UP
+            this.readAllMeetings();
+        },
         data() {
             return {
                 meetings: []
             };
         },
         methods: {
+            readAllMeetings() {
+              this.$http.get('meetings')
+                  .then(response => {
+                      this.meetings = response.body;
+                      console.log("Meetings were read again: " + this.meetings);
+                  })
+                  .catch(response => {
+                    console.log("Meetings were not read again - sth went wront.");
+                  });
+              },
+
             addNewMeeting(meeting) {
                 this.meetings.push(meeting);
+                this.$http.post('meetings', meeting)
+                    .then(() => {
+                      console.log('Given meeting was added: ' + meeting.name + " " + meeting.description);
+                      this.readAllMeetings();
+                    })
+                    .catch(response => {
+                        console.log("Meeting was not created -> error");
+                    });
             },
             addMeetingParticipant(meeting) {
                 meeting.participants.push(this.username);
