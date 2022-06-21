@@ -9,8 +9,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for="meeting in meetings" :key="meeting.name">
-      <td>{{ meeting.name }}</td>
+    <tr v-for="meeting in meetings" :key="meeting.id">
+      <td>{{ meeting.title }}</td>
       <td>{{ meeting.description }}</td>
       <td>
         <ul v-if="meeting.participants">
@@ -18,6 +18,7 @@
             {{ participant }}
           </li>
         </ul>
+        <ul v-else-if>Narazie brak uczestników</ul>
       </td>
       <td style="text-align: right; min-width: 400px" v-if="meeting.participants">
         <button v-if="meeting.participants.indexOf(username) < 0"

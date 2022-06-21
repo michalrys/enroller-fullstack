@@ -39,9 +39,11 @@ export default {
           .then(response => {
             this.meetings = response.body;
             console.log("Meetings were read again: " + this.meetings);
+            let lastMeeting = this.meetings[this.meetings.length - 1];
+            console.log("last meeting is: Name=" + lastMeeting.name + " desc=" + lastMeeting.description);
           })
           .catch(response => {
-            console.log("Meetings were not read again - sth went wront.");
+            console.log("Meetings were not read again - sth went wrong.");
           });
     },
 
@@ -49,7 +51,7 @@ export default {
       this.meetings.push(meeting);
       this.$http.post('meetings', meeting)
           .then(() => {
-            console.log('Given meeting was added: ' + meeting.name + " " + meeting.description);
+            console.log('Given meeting was added: name=' + meeting.name + " description=" + meeting.description);
             this.readAllMeetings();
           })
           .catch(response => {
