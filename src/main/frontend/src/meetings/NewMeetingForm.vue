@@ -14,31 +14,31 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                newMeeting: {participants: []},
-                adding: false,
-                error: false
-            };
-        },
-        methods: {
-            addNewMeeting() {
-                this.error = false;
-                if (this.newMeeting.name) {
-                    this.$emit('added', this.newMeeting);
-                    this.newMeeting = {participants: []};
-                    this.adding = false;
-                } else {
-                    this.error = true;
-                }
-            }
-        }
+export default {
+  data() {
+    return {
+      newMeeting: {participants: []},
+      adding: false,
+      error: false
+    };
+  },
+  methods: {
+    addNewMeeting() {
+      this.error = false;
+      if (this.newMeeting.name) {
+        this.$emit('added', this.newMeeting);
+        this.newMeeting = {participants: []};
+        this.adding = false;
+      } else {
+        this.error = true;
+      }
     }
+  }
+}
 </script>
 
 <style scoped>
-  .error {
-    color: #F00;
-  }
+.error {
+  color: #F00;
+}
 </style>

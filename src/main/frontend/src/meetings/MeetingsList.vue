@@ -36,7 +36,7 @@
 </template>
 
 <script>
-    export default {
-        props: ['meetings', 'username']
-    }
+export default {
+  props: ['meetings', 'username']
+}
 </script>

@@ -9,22 +9,22 @@
 </template>
 
 <script>
-    export default {
-        props: ["buttonLabel"],
-        data() {
-            return {
-                user: {}
-            };
-        },
-        methods: {
-            enter() {
-                this.$emit("submit", this.user);
-            }
-        },
-        computed: {
-            labelOfTheButton() {
-                return this.buttonLabel || 'Zaloguj się';
-            }
-        }
+export default {
+  props: ["buttonLabel"],
+  data() {
+    return {
+      user: {}
     };
+  },
+  methods: {
+    enter() {
+      this.$emit("submit", this.user);
+    }
+  },
+  computed: {
+    labelOfTheButton() {
+      return this.buttonLabel || 'Zaloguj się';
+    }
+  }
+};
 </script>
