@@ -48,6 +48,15 @@ export default {
     },
 
     addNewMeeting(meeting) {
+      let currentTitle = meeting.title;
+      for (let i = 0; i < this.meetings.length; i++) {
+        let title = this.meetings[i].title;
+        if (currentTitle === title) {
+          alert("Meeting title must be unique. Try again.");
+          return;
+        }
+      }
+
       this.meetings.push(meeting);
       this.$http.post('meetings', meeting)
           .then(() => {
