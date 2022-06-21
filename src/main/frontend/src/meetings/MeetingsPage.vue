@@ -73,14 +73,24 @@ export default {
             console.log("Meeting was not created -> error");
           });
     },
+
     addMeetingParticipant(meeting) {
       meeting.participants.push(this.username);
     },
+
     removeMeetingParticipant(meeting) {
       meeting.participants.splice(meeting.participants.indexOf(this.username), 1);
     },
+
     deleteMeeting(meeting) {
       this.meetings.splice(this.meetings.indexOf(meeting), 1);
+      this.$http.delete('meetings/title=' + meeting.title)
+          .then(response => {
+            console.log("Meeting was deleted: " + meeting.title);
+          })
+          .catch(response => {
+            console.log("Problem with deleting meeting " + meeting.title);
+          });
     }
   }
 }

@@ -72,7 +72,7 @@ public class MeetingRestController {
         return new ResponseEntity<>(meeting, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/api/title={id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/title={id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteMeetingByTitle(@PathVariable("id") String meetingTitle) {
         Collection<Meeting> meetingsFoundByTitle = meetingService.findByTitle(meetingTitle);
         if (meetingsFoundByTitle.size() == 0) {
@@ -82,7 +82,7 @@ public class MeetingRestController {
         return new ResponseEntity<>("Meeting with title '" + meetingTitle + "' was deleted.", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/api/title={id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/title={id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateMeetingByTitle(@PathVariable("id") String title, @RequestBody Meeting meetingWithNewData) {
         Collection<Meeting> meetingsFoundByTitle = meetingService.findByTitle(title);
         if (meetingsFoundByTitle.size() == 0) {
