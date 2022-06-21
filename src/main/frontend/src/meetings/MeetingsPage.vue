@@ -91,6 +91,18 @@ export default {
 
     removeMeetingParticipant(meeting) {
       meeting.participants.splice(meeting.participants.indexOf(this.username), 1);
+      ///api/meetings/remove=user2&from=some title
+      let title = meeting.title;
+      let login = this.username;
+
+      this.$http.put('meetings/remove=' + login + '&from=' + title)
+          .then(response => {
+            console.log("User " + login + " was removed from meeting " + title);
+          })
+          .catch(response => {
+            console.log("Problem with removing user " + login + " from a meeting " + title);
+          });
+      this.readAllMeetings();
     },
 
     deleteMeeting(meeting) {
