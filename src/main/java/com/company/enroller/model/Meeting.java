@@ -24,8 +24,16 @@ public class Meeting {
     @Column
     private String date;
 
+//    @JsonIgnore
+//    @ManyToMany(mappedBy = "meetings")
+//    Set<Participant> participants = new HashSet<>();
+
     @JsonIgnore
-    @ManyToMany(mappedBy = "meetings")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "meeting_participant",
+            joinColumns = {@JoinColumn(name = "meeting_id")},
+            inverseJoinColumns = {@JoinColumn(name = "participant_login")})
     Set<Participant> participants = new HashSet<>();
 
     public long getId() {
