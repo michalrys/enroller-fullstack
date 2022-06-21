@@ -76,6 +76,17 @@ export default {
 
     addMeetingParticipant(meeting) {
       meeting.participants.push(this.username);
+      let title = meeting.title;
+      let login = this.username;
+
+      this.$http.put('meetings/meetingtitle=' + title + '&participantlogin=' + login)
+          .then(response => {
+            console.log("User " + login + " was added to meeting " + title);
+          })
+          .catch(response => {
+            console.log("Problem with adding user " + login + " to a meeting " + title);
+          });
+      this.readAllMeetings();
     },
 
     removeMeetingParticipant(meeting) {
