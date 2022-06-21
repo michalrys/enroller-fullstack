@@ -37,10 +37,16 @@ export default {
     readAllMeetings() {
       this.$http.get('meetings')
           .then(response => {
-            this.meetings = response.body;
+            this.meetings = response.data;
+            //FIXME: for debug only
+            console.log("RESPONSE DATA:");
+            console.log(response.data);
+
             console.log("Meetings were read again: " + this.meetings);
             let lastMeeting = this.meetings[this.meetings.length - 1];
-            console.log("last meeting is: Name=" + lastMeeting.name + " desc=" + lastMeeting.description);
+            console.log("last meeting is: Name=" + lastMeeting.title + " desc=" + lastMeeting.description);
+            console.log(lastMeeting);
+            console.log(lastMeeting.participants);
           })
           .catch(response => {
             console.log("Meetings were not read again - sth went wrong.");
